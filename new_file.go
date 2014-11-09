@@ -36,30 +36,7 @@ func (this *Node) Add(nodes... *Node) bool {
 	return this.Size() == size + len(nodes)
 }
 
-func main() {
-	var root *Node = &Node{"001", "", "DbName", "MySql", nil}
-	data := []*Node{
-		&Node{"002", "001", "Db","DuoV6", nil},
-		&Node{"003", "002", "Username","Duov6", nil},
-		&Node{"004", "002", "Password","123", nil},
-		&Node{"005", "004", "tables","Auth", nil},
-		&Node{"006", "004", "tables","Config", nil},
-		&Node{"007", "004", "tables","derective", nil},
-		&Node{"008", "004", "Rabbtablesitmq","Users", nil},
-		&Node{"009", "004", "tables","Canves", nil},
-		&Node{"010", "004", "tables","test table 1", nil},
-		&Node{"011", "004", "tables","test table 2 ", nil},
-		&Node{"012", "004", "tables","test table 3", nil},
-		
-	}
-	fmt.Println(root.Add(data...), root.Size())
-	bytes, _ := json.MarshalIndent(root, "", "\t") //formated output
-	//bytes, _ := json.Marshal(root)
-	fmt.Println(string(bytes))
-	
-	
-	
-	
+func Save(dataset []byte){
 	configFile:="Config.txt"
 	file, err := os.Open(configFile)
 	
@@ -84,10 +61,40 @@ func main() {
 	//fmt.Println(c.m,"before write to file 23")
 	//or k,v :=range c.m{
 		//fmt.Println(k,v,"\n")
-	    if _, err = file1.WriteString(string(bytes)); err != nil {
+	    if _, err = file1.WriteString(string(dataset)); err != nil {
     	  	panic(err)
     	}
 	//}
+	
+}
+
+
+func main() {
+	var root *Node = &Node{"001", "", "DbName", "MySql", nil}
+	data := []*Node{
+		&Node{"002", "001", "Db","DuoV6", nil},
+		&Node{"003", "002", "Username","Duov6", nil},
+		&Node{"004", "002", "Password","123", nil},
+		&Node{"005", "004", "tables","Auth", nil},
+		&Node{"006", "004", "tables","Config", nil},
+		&Node{"007", "004", "tables","derective", nil},
+		&Node{"008", "004", "Rabbtablesitmq","Users", nil},
+		&Node{"009", "004", "tables","Canves", nil},
+		&Node{"010", "004", "tables","test table 1", nil},
+		&Node{"011", "004", "tables","test table 2 ", nil},
+		&Node{"012", "004", "tables","test table 3", nil},
+		
+	}
+	fmt.Println(root.Add(data...), root.Size())
+	bytes, _ := json.MarshalIndent(root, "", "\t") //formated output
+	//bytes, _ := json.Marshal(root)
+	fmt.Println(string(bytes))
+	
+	Save(bytes)
+	
+	
+	
+	
 	
 	
 	
